@@ -30,7 +30,7 @@ The suggested midiplayer for `MacOS` is `playmidi`.
 You can download the binary from 
 [http://ssb22.user.srcf.net/mwrhome/mac-midi.html](http://ssb22.user.srcf.net/mwrhome/mac-midi.html).   
 You can also download the source from this site an compile it yourself.    
-The standard folder to put it is `\usr\local\bin`.
+The standard folder to put it is `/usr/local/bin`.
 
 When the command line midiplayer is installed,
 the environment variable `R_MIDIPLAYER` needs to be set to
@@ -38,7 +38,7 @@ the path to the player.
 This can be done by using the R command 
 `usethis::edit_r_environ` (which opens the users file
 `.Renviron`), adding the  line     
-`R_MIDIPLAYER = "playmidi"`     
+`R_MIDIPLAYER = "/usr/local/bin/playmidi"`     
 and saving the file.
 
 ## Linux
@@ -58,19 +58,26 @@ installed using the package manager.
 Additionally the `timidity` configuration file needs to contain
 information which soundfont to use.
 
-On Ubuntu, this information is in the file `\etc\timidity\timidity.cfg`.
+On Ubuntu, this information is in the file `/etc/timidity/timidity.cfg`.
 To tell `timidity` on Ubuntu to use the soundfont `freepats`, the config file
 has to contain the (uncommented) line   
 `source /etc/timidity/freepats.cfg`
 
 When the command line midiplayer is installed,
 the environment variable `R_MIDIPLAYER` needs to be set to
-the path to the player.    
+the path to the player.       
+To find out where timidity is installed, open a terminal
+(in RStudio you can use the builtin terminal), and run the command    
+`which timidity`.
+Then, set the variable `R_MIDIPLAYER` to the output
+of this command.
 This can be done by using the R command 
 `usethis::edit_r_environ` (which opens the users file
-`.Renviron`), adding the  line     
-`R_MIDIPLAYER = "timidity"`     
-and saving the file.
+`.Renviron`). If the output of `which timidity` is
+`/usr/bin/timidity`,       
+add the line
+`R_MIDIPLAYER = "/usr/bin/timidity"`     
+and save the file.
 
 
 ## Windows
