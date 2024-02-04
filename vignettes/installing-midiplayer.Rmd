@@ -1,0 +1,84 @@
+---
+title: "installing-midiplayer"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{installing-midiplayer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Mac
+
+Unlike Windows, MacOS does not supply MIDI playing software by default. 
+Garageband can play MIDI files, but it cannot be called from another software
+in a way it starts playing a MIDI file immediately. 
+
+`midiplayR` needs a MIDI playing software which can be called from
+the command line with the name of the file do be played
+as a parameter.
+
+The suggested midiplayer for `MacOS` is `playmidi`.
+
+You can download the binary from 
+[http://ssb22.user.srcf.net/mwrhome/mac-midi.html](http://ssb22.user.srcf.net/mwrhome/mac-midi.html).   
+You can also download the source from this site an compile it yourself.    
+The standard folder to put it is `\usr\local\bin`.
+
+When the command line midiplayer is installed,
+the environment variable `R_MIDIPLAYER` needs to be set to
+the path to the player.    
+This can be done by using the R command 
+`usethis::edit_r_environ` (which opens the users file
+`.Renviron`), adding the  line     
+`R_MIDIPLAYER = "playmidi"`     
+and saving the file.
+
+## Linux
+
+Unlike Windows, Linux does not supply MIDI playing software by default. 
+
+`midiplayR` needs a MIDI playing software which can be called from
+the command line with the name of the file do be played
+as a parameter.
+
+Many Linux distributions offer a packaged version of `timidity` for 
+playing MIDI files. It can be installed using the package manager of 
+the distribution. `timidity` needs soundfonts, which also need to be
+installed. A soundfont sounding very nice is `freepats`, which also can be 
+installed using the package manager.
+
+Additionally the `timidity` configuration file needs to contain
+information which soundfont to use.
+
+On Ubuntu, this information is in the file `\etc\timidity\timidity.cfg`.
+To tell `timidity` on Ubuntu to use the soundfont `freepats`, the config file
+has to contain the (uncommented) line   
+`source /etc/timidity/freepats.cfg`
+
+When the command line midiplayer is installed,
+the environment variable `R_MIDIPLAYER` needs to be set to
+the path to the player.    
+This can be done by using the R command 
+`usethis::edit_r_environ` (which opens the users file
+`.Renviron`), adding the  line     
+`R_MIDIPLAYER = "timidity"`     
+and saving the file.
+
+
+## Windows
+
+In Windows, MIDI files are associated with the Windows Media player, therefore
+no additional MIDI playing software is needed.      
+`midiplayR` checks if the media player is installed correctly and
+if thet is the case, can play MIDI files without the need to install
+additional software.
+
+
