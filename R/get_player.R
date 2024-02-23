@@ -23,15 +23,25 @@ get_player_mac_linux <- function(){
             "If this file does not exist, you must create it.",
             "You can create and edit `.Renviron` with the R command 'usethis::edit_r_environ()'.",
             "Vignette 'installing-midiplayer' explains how to install midiplayer software.",
-            "After you have done that, restart R.",
+            "You can read this vignette byr running the command",
+            "'vignette(\"installing-midiplayer\")'",
+            "After you have installed a midiplayer, restart R.\n",
             sep="\n"
       )
     )
     utils::vignette("installing-midiplayer",package="midiplayR")
     return("")
-  } else {
-    return(midiplayer)
   }
+  if(system(
+    paste("which",
+          unlist(strsplit(midiplayer," "))[1]),
+    ignore.stdout = TRUE, ignore.stderr = TRUE) != 0) {
+    cat(paste("program",
+              unlist(strsplit(midiplayer," "))[1],
+              "not in path","\n"))
+    return("")
+  }
+    return(midiplayer)
 }
 
 
@@ -49,12 +59,6 @@ check_win_mediaplayer <- function(){
     stop("Windows Media Player is not accessible.\n")
   }
   return(res)
-}
-
-is_midi_file <- function(file){
-  first_bytes <- readBin(file,"integer",10,size=1,signed=FALSE)
-  all(first_bytes[1:4] == c(77,84,104,100)) &
-    (first_bytes[10] %in% 0:2)
 }
 
 

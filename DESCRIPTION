@@ -3,6 +3,7 @@ Type: Package
 Title: Play MIDI files from within R
 Version: 0.1.0.9002
 Authors@R: person("Erich", "Neuwirth", , "erich.neuwirth@univie.ac.at", role = c("aut", "cre"))
+Maintainer: Erich Neuwirth <erich.neuwirth@univie.ac.at>
 Description: Play midi files on Mac, Linux, and Windows.
     Checks if MIDI player software is installed
     and recommends installing platform specific 

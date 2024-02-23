@@ -1,5 +1,5 @@
 ---
-title: "installing-midiplayer"
+title: "Installing midiplayer software"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{installing-midiplayer}
